@@ -309,7 +309,7 @@ public class HttpTdaClient implements TdaClient {
   }
 
   @Override
-  public void placeOrder(String accountId, Order order) {
+  public String placeOrder(String accountId, Order order) {
     LOGGER.info("Placing Order for account[{}] -> {}", accountId, order);
     if (StringUtils.isBlank(accountId)) {
       throw new IllegalArgumentException("accountId cannot be blank.");
@@ -330,10 +330,11 @@ public class HttpTdaClient implements TdaClient {
       if (response.code() != 201) {
         LOGGER.warn("Expected 201 response, but received " + response.code());
       }
+      String[] locationArray=response.header("location").split("/");
+      return locationArray[locationArray.length-1];
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
   }
 
   @Override

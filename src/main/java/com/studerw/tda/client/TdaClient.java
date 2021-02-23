@@ -175,7 +175,7 @@ public interface TdaClient {
    * @see <a href="https://developer.tdameritrade.com/content/place-order-samples">Place Order
    * Samples</a>
    */
-  void placeOrder(String accountId, Order order);
+  String placeOrder(String accountId, Order order);
 
   /**
    * <p>
